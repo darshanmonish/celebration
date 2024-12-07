@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Celebrate</title>
+    <style>
+        /* Global Styles */
+        body {
+        margin: 0;
+        padding: 0;
+        font-family: 'Arial', sans-serif;
+        background: url('img.gif') no-repeat center center fixed;
+        background-size: cover;
+        color: rgb(247, 86, 112);
+        height: 100vh;
+        overflow: hidden;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        flex-direction: column;
+        text-align: center;
+        border: rgb(243, 173, 196) solid 10px;
+        border-radius: 20px;
+    }
+
+    h1 {
+        font-size: 8vw; /* Adjust font size dynamically */
+        animation: fadeIn 2s ease-in-out;
+        margin: 0;
+    }
+
+        .confetti {
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            overflow: hidden;
+        }
+
+        .confetti-piece {
+            position: absolute;
+            width: 8px;
+            height: 16px;
+            background-color: #ff6f61;
+            animation: fall 3s ease-in-out infinite;
+        }
+
+        .confetti-piece:nth-child(even) {
+            background-color: #ffdf61;
+        }
+
+        .confetti-piece:nth-child(odd) {
+            animation-delay: 0.5s;
+        }
+
+        .play-button {
+            margin-top: 20px;
+            background-color: #ff6f61;
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 1.2rem;
+            box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2);
+        }
+
+        .play-button:hover {
+            background-color: #ff4d4d;
+        }
+
+        @keyframes fadeIn {
+            0% {
+                opacity: 0;
+            }
+            100% {
+                opacity: 1;
+            }
+        }
+
+        @keyframes fall {
+            0% {
+                transform: translateY(-100%) rotate(0deg);
+                opacity: 1;
+            }
+            100% {
+                transform: translateY(100vh) rotate(360deg);
+                opacity: 0;
+            }
+        }
+
+        /* Mobile-First Design */
+        @media (max-width: 480px) {
+            h1 {
+                font-size: 12vw; /* Larger font size for small screens */
+            }
+
+            .play-button {
+                font-size: 1rem; /* Smaller button font size */
+                padding: 8px 16px; /* Adjust button padding */
+            }
+
+            .confetti-piece {
+                width: 6px;
+                height: 12px; /* Smaller confetti size for mobile */
+            }
+        }
+    </style>
+</head>
+<body>
+    <h1>Happy Birthday Abi,From My Hearty Wishing by your Soul Darshan</h1>
+    <div class="confetti"></div>
+
+    <!-- Add the audio -->
+    <audio id="birthday-song" autoplay loop muted>
+        <source src="song.mpeg" type="audio/mpeg">
+        Your browser does not support the audio tag.
+    </audio>
+
+    
+    <script>
+        const confettiContainer = document.querySelector('.confetti');
+        const audio = document.getElementById('birthday-song');
+    
+        // Generate confetti pieces
+        for (let i = 0; i < 100; i++) {
+            const confettiPiece = document.createElement('div');
+            confettiPiece.classList.add('confetti-piece');
+            confettiPiece.style.left = Math.random() * 100 + 'vw';
+            confettiPiece.style.animationDuration = Math.random() * 3 + 2 + 's';
+            confettiContainer.appendChild(confettiPiece);
+        }
+    
+        // Autoplay audio if query parameter `play=true` exists
+        const urlParams = new URLSearchParams(window.location.search);
+        if (urlParams.get('play') === 'true') {
+            audio.muted = false; // Unmute audio
+            audio.play();
+        }
+    
+        // Manual replay button
+        function playSong() {
+            audio.muted = false; // Ensure unmuted
+            audio.play();
+        }
+    </script>
+    
+</body>
+</html>
